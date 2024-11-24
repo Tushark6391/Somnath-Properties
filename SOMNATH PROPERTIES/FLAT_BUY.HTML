@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+    <title>enter the details</title>
+</head>
+<STYLE>
+    form{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+</STYLE>
+<body>
+    <div>
+        <h1>enter the details(FLAT_BUY)</h1>
+        <form action = "FLAT_BUY.php"  class="text-center" method="post" enctype="multipart/form-data">
+            <input type="file" name = "image" class="form-control" multiple>
+            <input href="FLAT_BUY.php" type="submit" name="upload" value="UPLOAD" class="btnbtn-success">
+            <div class="form-group">
+                <label for="details">DETAILS: </label>
+                <textarea name="DETAILS" id="details" cols="99" rows="30"></textarea>
+            </div>
+            
+        </form>
+        <a href="displaypage.html" target="_blank">next</a>
+         <!-- Include Owl Carousel JavaScript -->
+    <script src="jquery.min.js"></script>
+    <script src="owl.carousel.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Handle form submission
+            $('form').submit(function(event) {
+                event.preventDefault();
+                var imageUrl = $('input[name="image"]').val();
+                var details = $('textarea[name="DETAILS"]').val();
+                var carouselItem = '<div><img src="' + imageUrl + '" class="photos" style="width:400px;height:400px;align-items:center;display:flex;justify-content:center;background-color:black;border-radius:30px;"><h2 class="details">' + details + '</h2></div>';
+                $('.owl-carousel').owlCarousel('add', carouselItem).owlCarousel('update');
+                $('input[name="image"]').val('');
+                $('textarea[name="DETAILS"]').val('');
+            });
+
+            // Initialize Owl Carousel
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 5
+                    }
+                }
+            });
+        });
+    </script>
+    </div>
+</body>
+</html>

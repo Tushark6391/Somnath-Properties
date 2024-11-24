@@ -1,0 +1,39 @@
+For login Page:
+To create a secure login system using PHP, we need to follow several best practices to prevent common security vulnerabilities like SQL injection, session hijacking, and cross-site scripting (XSS). Below is an example of a PHP code for the login page that incorporates these safety measures:
+Please make sure to replace "your_servername," "your_username," "your_password," and "your_dbname" in the db_connection.php file with your actual database credentials. Additionally, ensure that the users table in your database contains a column named "password" where hashed passwords are stored.
+
+The code above includes measures to prevent SQL injection by using mysqli_real_escape_string() and hashing the password before storing it in the database. It also uses PHP sessions to manage user login state, so you need to have session_start() at the beginning of each PHP file that needs to access session data.
+
+Remember that this is a basic example and that a full-fledged authentication system may require additional features, such as user registration, password reset, and user role management. Always follow best security practices, keep your PHP and MySQL versions up to date, and use prepared statements or parameterized queries to further enhance security.
+
+
+----------------------------------------------------------------------------------------------------------------------------
+For all the displaying pages:
+This PHP code is a part of a web page that allows users to upload images and details of flats for rent and then view the uploaded images and details. Below is a step-by-step explanation of the code:
+
+1. **Connecting to the Database:**
+   - The code starts by establishing a connection to the MySQL database using `mysqli_connect()`. The function takes four parameters: the server address (`localhost`), the database username (`root`), the database password (blank in this case), and the database name (`display_page`). The connection is stored in the variable `$con`.
+
+2. **Image Upload and Details Insertion:**
+   - When the form is submitted (the "upload" button is clicked), the PHP code processes the image and details submitted via the form and stores them in the database.
+   - The uploaded image file name is retrieved using `$_FILES['image']['name']`, and the details are obtained using `$_POST['DETAILS']`.
+   - A SQL `INSERT` query is constructed to insert the file name and details into the `flat_rent` table.
+   - The `mysqli_query()` function executes the query, and if successful, the image is moved to the server's location using `move_uploaded_file()`.
+
+3. **Displaying Flats for Rent:**
+   - The code then displays a header "Flats for Rent" and a search form with an input field and a search button. The user can enter keywords to search for specific flats based on the details.
+   - The `search()` function (not shown in the provided code) is a JavaScript function that allows live searching on the page as the user types in the search input field.
+
+4. **Handling Search:**
+   - If the search button is clicked (the "search" button in the form), the code checks for the existence of `$_POST['search']` using `ISSET()`. If it's set, it means the search button was clicked.
+   - The code retrieves the search keyword from `$_POST['item']` and constructs a SQL `SELECT` query to retrieve flats that have details matching the keyword (using `LIKE` with `%` for partial matches).
+   - If the search button was not clicked, it executes a default query to fetch all the records from the `flat_rent` table.
+
+5. **Displaying the Results:**
+   - The code prepares an HTML output to display the images and details of flats for rent based on the search result.
+   - Inside a `while` loop, it fetches each row (flat) from the result set using `mysqli_fetch_array()`.
+   - For each flat, it displays the image using an `<img>` tag with the source taken from the database.
+   - It also displays the flat details using an `<h2>` tag.
+   - The output is then echoed to display the flats on the web page.
+
+Please note that this code provided is not complete and does not include the `search()` JavaScript function or the `flat_rent.css` file, which could be important for the proper functionality and styling of the page. Additionally, this code lacks security measures like input validation and sanitization, which are essential to prevent SQL injection and other security vulnerabilities. Always validate and sanitize user inputs before using them in SQL queries to ensure the security of your application.
